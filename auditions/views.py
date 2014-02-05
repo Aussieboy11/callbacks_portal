@@ -165,11 +165,14 @@ def group_admin(request):
 	except:
 		return check_login(request, '/group_admin')
 	admin = Admin.objects.filter(net_id=netid)
+
 	if len(admin) is 0:
 		print admin
 		#no callbackee with this name
 		return render_to_response("admin_error.html")
 	admin = admin[0]
+	if (admin.group.selections_confirmed == True):
+		return HttpResponseRedirect('/group_results')
 	c={}
 	c['admin'] = admin
 	existing = Callbacks.objects.filter(group = admin.group)
