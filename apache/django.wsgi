@@ -7,7 +7,9 @@ if path not in sys.path:
 path = '/var/www/'
 if path not in sys.path:
     sys.path.append(path)
-
+path = '/var/www/auditions/auditions/'
+if path not in sys.path:
+    sys.path.append(path)
 os.environ['DJANGO_SETTINGS_MODULE'] = 'auditions.settings'
 
 import django.core.handlers.wsgi
