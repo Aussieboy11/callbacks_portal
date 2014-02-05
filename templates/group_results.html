@@ -1,0 +1,31 @@
+{% include "importfiles.html" %}
+
+{% include "navbar_admin.html" %}
+<div align='center'>
+	<table class="table table-condensed">
+		<thead>
+			<th style='text-align:center'> Name</th>
+			<th style='text-align:center'> Did they accept your callback?</th>
+		</thead>
+		{%for callback in callbacks_accepted%}
+		<tr> 
+			<td> {{callback.callbackee.first_name}} {{callback.callbackee.last_name}} </td>
+			<td> <span class="glyphicon glyphicon-ok"></span> </td>
+		</tr>
+		{% endfor %}
+		{%for callback in callbacks_rejected%}
+		<tr> 
+			<td> {{callback..callbackee.first_name}} {{callback.callbackee.last_name}} </td>
+			<td> <span class="glyphicon glyphicon-remove"></span> </td>
+		</tr>
+		{% endfor %}
+		{%for callback in callbacks_questioning%}
+		<tr> 
+			<td> {{callback.callbackee.first_name}} {{callback.callbackee.last_name}} </td>
+			<td> <span class="glyphicon glyphicon-question-sign"></span> </td>
+		</tr>
+		{% endfor %}
+
+
+	</table>
+</div>

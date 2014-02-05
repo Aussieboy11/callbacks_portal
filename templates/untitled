@@ -1,0 +1,13 @@
+{% load staticfiles %}
+<script type="text/javascript" src="{% static "jquery.min.js" %}"></script>
+<script type="text/javascript" src="{% static "dist/js/alert.js" %}"></script>
+<script type="text/javascript" src="{% static "dist/js/bootstrap.min.js" %}"></script>
+<script type="text/javascript" src="{% static "ajax_setup.js" %}" ></script>
+<link rel="stylesheet" type="text/css" href="{% static "dist/css/bootstrap.min.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "dist/css/bootstrap-theme.min.css" %}">
+
+
+<h2 style="text-align:center">
+Below are the callbacks you have chosen to accept and reject.
+</h2>
+

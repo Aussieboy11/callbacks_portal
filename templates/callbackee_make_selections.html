@@ -1,0 +1,130 @@
+{% include "importfiles.html" %}
+
+{% include "navbar.html" %}
+
+<div class="body_div">
+	<h2 style="text-align:center">
+		MAKE YOUR GROUP SELECTIONS HERE!
+	</h2>
+
+	<p style="text-align:center">
+		Here you can submit your decisions about how many callbacks you would like to take. You have received callbacks from {{callbacks|length}} group{% if  callbacks|length != 1 %}s{% endif%}: 
+		{% for callback in callbacks%} {{callback.group.name}}{% if not forloop.last %}{% ifequal forloop.revcounter 2 %} and {% else %}, {% endifequal %}{% else %}{% endif %}{%endfor%}. <br/>
+
+		You can choose to accept 0, 1, or 2 callbacks, depending on the number of callbacks you received.
+
+		INSERT BLURB HERE
+	</p>
+<!-- <div align="center">
+	<form class="form" role="form" action='/save_selections' style="text-align:center">
+
+		<i><h5> First selection </h5></i>
+		<select class="form-control" style="width:200px;">
+			<option selected> None </option>
+			{% for callback in callbacks %}
+			<option>{{callback.group.name}}</option>
+			{% endfor %}
+		</select>
+		<i><h5> Second selection </h5></i>
+		<select class="form-control" style="width:200px;text-align:center">
+			<option selected> None </option>
+			{% for callback in callbacks %}
+			<option>{{callback.group.name}}</option>
+			{% endfor %}
+		</select>
+
+	</form>
+</div> -->
+
+<br/>
+<br/>
+<br/>
+
+
+
+
+<div align="center">
+	<form action='/save_selections'>
+		<i><h5> First selection </h5></i>
+		<select name='first_choice' class="form-control" style="width:500px">
+			<option selected>None</option>
+			{% for callback in callbacks %}
+			<option>{{callback.group.name}}</option>
+			{% endfor %}
+		</select>
+		<i><h5> Second selection </h5></i>
+		<select name='second_choice' class="form-control" style="width:500px">
+			<option selected>None</option>
+			{% for callback in callbacks %}
+			<option>{{callback.group.name}}</option>
+			{% endfor %}
+		</select>
+		<br/>
+
+		<div class='warning_div'></div>
+
+		<h3><strong>Do you have timing conflicts with any of the callbacks sessions? We need to know for scheduling purposes. If you have a time conflict with a session, please check the box next to that session.</strong></h3>
+
+		<div class="checkbox" style='width:500px;'>
+			<label>
+				<input name='conflict_with_first' type="checkbox" value="True">
+				First callback session (5:00pm - 7:00pm this Friday)
+
+
+			</label>
+		</div>
+		<div class="checkbox" style='width:500px;'>
+			<label>
+				<input name='conflict_with_second' type="checkbox" value="True">
+				Second callback session (7:30pm - 9:30pm this Friday)
+
+			</label>
+		</div>
+		<div class="checkbox" style='width:500px;'>
+			<label>
+				<input name='conflict_with_third' type="checkbox" value="True">
+				Third callback session (10:00pm - 12:00am this Friday)
+
+			</label>
+		</div>
+
+
+
+		<input type="submit" name="submit" class="btn btn-default submission_button" />
+	</form>
+</div>
+
+</div>
+
+
+<!-- add logic to verify form selection -->
+<script>
+function addWarningErrorToDiv(div, error) {
+// 	<div class="alert alert-warning alert-dismissable">
+//   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+//   <strong>Warning!</strong> Better check yourself, you're not looking too good.
+// </div>
+	var errorMessage = "";
+	errorMessage += "<center><div class=\"alert alert-warning alert-dismissable\" style=\"width:500px; \">";
+	errorMessage += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";
+	errorMessage += "<strong>Warning</strong>: ";
+	errorMessage += error;
+	errorMessage += "</div></center>";
+	div.append(errorMessage);
+}
+$('.submission_button').click(function(){
+	if ($(this).siblings('select[name=first_choice]').find(":selected").text()=='None') {
+		var r = confirm('Are you sure that you do not want to accept any callbacks?');
+		if (r == true)
+			return true;
+		else
+			return false;
+	}
+	if ($(this).siblings('select[name=first_choice]').find(":selected").text()==$(this).siblings('select[name=second_choice]').find(":selected").text()) {
+		addWarningErrorToDiv($(this).siblings('.warning_div'), 'You have chosen the same group twice. You cannot do that. Please change one of your choices to either another group or None.');
+		return false;
+
+	}
+});
+</script>
+

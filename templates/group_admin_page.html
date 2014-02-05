@@ -1,0 +1,208 @@
+{% include "importfiles.html" %}
+
+{% include "navbar_admin.html" %}
+
+<!-- add ones that we already have as disabled forms here -->
+
+<h2 style="text-align:center">Submit the singers you called back. </h2>
+
+<h5 style="text-align:center; margin-left:100px;margin-right:100px;">Below, please enter the first name, last name, and netID of each of the people you called back. If you need to modify any of the information, just delete the row and add the correct information!</h5>
+
+<div class="all_submissions" style="text-align:center">
+
+
+	{% if existing|length == 0 %}
+	<div class="current_submissions" style="border:5px solid black;margin:25px 200px;display:none;">
+	<h2>Previously Submitted Callbacks</h2>
+	</div>
+	{% else %}
+	<div class="current_submissions" style="border:5px solid black;margin:25px 200px;">
+	<h2>Previously Submitted Callbacks</h2>
+
+	{% for callback in existing%}
+
+	<form class="form-inline single_submission" action="" role="form" style="margin-top:30px;margin-bottom:30px;">
+			{% csrf_token %}
+			<div class="form-group has-feedback">
+				<!-- <label class="firstname" for="firstnameinput">First Name</label> -->
+				<input type="text" name="firstname" id="firstname"  value="{{ callback.callbackee.first_name }}" class="form-control" placeholder="First Name" disabled>
+			</div>
+			<div class="form-group has-feedback">
+				<input type="text" name="lastname" id="lastname" size="20" value="{{ callback.callbackee.last_name }}" class="form-control" placeholder="Last Name" disabled>
+			</div>
+			<div class="form-group has-feedback">
+				<input type="text" name="netid" id="netid" size="20" value="{{ callback.callbackee.net_id }}" class="form-control" placeholder="NetID" disabled>
+			</div>
+			<input type="submit" name="submit" class="btn btn-danger delete_button"  value='Delete' href='#' />
+		</form>
+
+	{% endfor %}
+	</div>	
+
+
+	{% endif %}
+
+	<div class="new_submissions" style="text-align:center">
+		<form class="form-inline single_submission" action="" role="form" style="margin-top:30px;margin-bottom:30px;">
+			{% csrf_token %}
+			<div class="form-group has-feedback">
+				<!-- <label class="firstname" for="firstnameinput">First Name</label> -->
+				<input type="text" name="firstname" id="firstname"  value="" class="form-control" placeholder="First Name">
+			</div>
+			<div class="form-group has-feedback">
+				<input type="text" name="lastname" id="lastname" size="20" value="" class="form-control" placeholder="Last Name">
+			</div>
+			<div class="form-group has-feedback">
+				<input type="text" name="netid" id="netid" size="20" value="" class="form-control" placeholder="NetID">
+			</div>
+			<input type="submit" name="submit" class="btn btn-success submission_button" />
+		</form>
+	</div>
+	<hr/>
+	<form class="form-horizontal" action="/confirm_groups_selections" role='form'>
+		<label for='submit' style='width:400px'>When you have entered all of the students you called back into the system and confirm that their names and netIDs are spelled correctly, please click the button below in order to notify them of their callback from your group. </label><br/>
+		<input type="submit" name="submit" class="btn btn-primary confirm_button" value='Confirm all callback submissions!'/>
+	</form>
+	
+</div>
+
+<script>
+
+
+
+function addWarningErrorToDiv(div, error) {
+// 	<div class="alert alert-warning alert-dismissable">
+//   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+//   <strong>Warning!</strong> Better check yourself, you're not looking too good.
+// </div>
+	var errorMessage = "";
+	errorMessage += "<center><div class=\"alert alert-warning alert-dismissable\" style=\"width:500px; \">";
+	errorMessage += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";
+	errorMessage += "<strong>Warning</strong>: ";
+	errorMessage += error;
+	errorMessage += "</div></center>";
+	div.append(errorMessage);
+}
+
+function addNewFormRow() {
+	var newDiv = '';
+	newDiv += "<form class=\"form-inline single_submission\" role=\"form\" style=\"margin-top:30px;margin-bottom:30px;\">";
+	newDiv += "{% csrf_token %}";
+	newDiv += "<div class=\"form-group\">";
+	newDiv += "<input type=\"text\" name=\"firstname\" id=\"firstname\" value=\"\" class=\"form-control\" placeholder=\"First Name\">";
+	newDiv += "</div> ";
+
+	newDiv += "<div class=\"form-group\">";
+	newDiv += "<input type=\"text\" name=\"lastname\" id=\"lastname\"  value=\"\" class=\"form-control\" placeholder=\"Last Name\">";
+	newDiv += '</div> ';
+	newDiv += '<div class="form-group">';
+	newDiv += '<input type="text" name="netid" id="netid"  value="" class="form-control" placeholder="NetID">';
+	newDiv += '</div> '
+	newDiv += '<input type="submit" name="submit" class="btn btn-success submission_button"  href=\'#\' /> ';
+	newDiv += '</form>';
+
+
+	$container = $(".new_submissions");
+	$container.append(newDiv);
+
+}
+
+$('.all_submissions').on(
+{
+	click: function modify() {
+		$(".alert").alert('close');
+		//make sure to close popovers here
+
+		//test first name
+		var first_name = $(this).siblings(".form-group").children("#firstname").val();  
+		if (first_name == "") {  
+			//add popover
+			$(this).siblings(".form-group").children("#firstname").focus();  
+			addWarningErrorToDiv($(this).parents('.single_submission'), 'No first name entered. Your request could not be submitted.');
+			return false;  
+		}  
+
+		//test last name
+		var last_name = $(this).siblings(".form-group").children("#lastname").val();  
+		if (last_name == "") {  
+			//add popover
+			$(this).siblings(".form-group").children("#lastname").focus();  
+			addWarningErrorToDiv($(this).parents('.single_submission'), 'No last name entered. Your request could not be submitted.');
+			return false;  
+		}  
+
+		//test netid
+		var netid = $(this).siblings(".form-group").children("#netid").val();  
+		if (netid == "") {  
+			//add popover
+			$(this).siblings(".form-group").children("#netid").focus();  
+			addWarningErrorToDiv($(this).parents('.single_submission'), 'No NetID entered. Your request could not be submitted.');
+			return false;  
+		}  
+		var add = -1;
+		if ($(this).hasClass("submission_button"))
+      		add = 1;
+    	if ($(this).hasClass("delete_button"))
+      		add = 0;
+      	$.ajax({
+      		context:this,
+      		type:"POST",
+      		url:"/add_remove_callbacks",
+      		data:{first:first_name, last:last_name, net_id:netid, group:'the Nassoons', add:add},
+      		success: function(data) {
+      			if (data.error_bool == true) {
+      				if (data.delete_not_found == true) {
+      					addWarningErrorToDiv($(this).parents('.single_submission'), 'No callbackee was found with this netID. Please try again or refresh to get your updated list of callbackees.');
+      				}
+
+      				//HAVE YOU OVERSTEPPED YOUR MAX COUNT
+      				alert("other problem");
+      				return false;
+      			}
+      			if ($(this).hasClass("submission_button")) {
+
+
+      				//make forms disabled
+
+      				//add success checks to each box
+      				$(this).siblings('.form-group').addClass('has-success');
+      				$(this).parents('.form-inline').append('<span class="label label-success">Success</span>');
+      				$(this).removeClass("submission_button");
+      				$(this).addClass("delete_button");
+      				$(this).removeClass('btn-success');
+      				$(this).addClass('btn-danger');
+      				$(this).val('Delete');
+      				$(this).siblings('.form-group').children('input').attr('disabled', 'true');
+      				$(this).siblings('.form-group').parents('.form-inline').appendTo('.current_submissions');
+      				if ($('.current_submissions').css('display') == 'none')
+      					$('.current_submissions').css("display", "block");
+
+      				//add new row
+      				addNewFormRow();
+      				return false;
+      				//add delete button to end of row
+      			}
+      			if ($(this).hasClass("delete_button")) {
+      				//delete this row
+      				$(this).parents('.form-inline').remove();
+      				if ($('.current_submissions .form-inline').length == 0)
+      					$('.current_submissions').css("display", "none");
+      			}	
+      		}
+
+      	});
+      	return false;
+
+
+
+	}
+},
+'.submission_button, .delete_button'
+);
+</script>
+<style>
+.alert {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+</style>

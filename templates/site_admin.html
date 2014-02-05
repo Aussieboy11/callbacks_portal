@@ -1,0 +1,30 @@
+{% include "importfiles.html" %}
+
+{% include "navbar_admin.html" %}
+
+<div align='center'>
+	<table class="table table-condensed">
+		<thead style='text-align:center'>
+			<th style='text-align:center'> Group Name</th>
+			<th style='text-align:center'> Selections confirmed?</th>
+		</thead>
+		{%for group in groups%}
+		<tr> 
+			<td> {{group.name}} </td>
+			<td> {% if group.selections_confirmed == True %}<span class="glyphicon glyphicon-ok"></span> {% else %} <span class="glyphicon glyphicon-remove"></span>{% endif %}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+
+	<form class="form-horizontal" action="/send_callbackee_emails" role='form'>
+		<label for='submit' style='width:400px'>After all of the group's have confirmed all of their submissions, here you can send all of the emails to the callbackees. </label><br/>
+		{% if all_groups_confirmed == True and all_emails_sent == False %}
+		<input type="submit" name="submit" class="btn btn-primary confirm_button" value='Send emails to all callbackees'/>
+		{% else %}
+		<input type="submit" name="submit" class="btn btn-primary confirm_button" value='Send emails to all callbackees' disabled='disabled'/>
+		{% endif %}
+	</form>
+</div>
+
+<!-- after successfully sending the form, remove the div with the button-->

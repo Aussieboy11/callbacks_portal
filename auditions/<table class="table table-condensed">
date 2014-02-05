@@ -1,0 +1,12 @@
+<table class="table table-condensed">
+  <thead>
+  <th> Group Name </th>
+  <th> Have they confirmed their selections<th>
+  </thead>
+  {%for group in groups%}
+  <tr> 
+  <td> group.name </td>
+  <td> group.selections_confirmed </td>
+  </tr>
+  {% %}
+</table>
