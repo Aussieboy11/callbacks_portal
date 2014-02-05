@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
+import models
 from auditions.models import *
 from django.template.loader import get_template
 from django.http import QueryDict
