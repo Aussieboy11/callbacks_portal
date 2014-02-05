@@ -85,7 +85,7 @@ def add_remove_callbackee(request):
 	if len(admin) is 0:
 		print admin
 		#no callbackee with this name
-		return render_to_response("admin_error.html")
+		return render_to_response("group_admin_error.html")
 	admin = admin[0]
 
 
