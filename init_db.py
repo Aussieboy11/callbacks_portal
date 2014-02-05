@@ -1,10 +1,11 @@
 import re
 import sys
 
-
+import os
 from auditions import settings
-from django.core.management import setup_environ
-setup_environ(settings)
+# from django.core.management import setup_environ
+# setup_environ(settings)
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "auditions.settings")
 from auditions.models import *
 
 
