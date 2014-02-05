@@ -4,7 +4,7 @@ import sys
 path = '/var/www/auditions/'
 if path not in sys.path:
     sys.path.append(path)
-   path = '/var/www/'
+path = '/var/www/'
 if path not in sys.path:
     sys.path.append(path)
 
