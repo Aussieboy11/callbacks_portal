@@ -11,7 +11,8 @@ from auditions.models import *
 
 #group_names = ['Roaring 20', 'the Katzenjammers', 'the Tigerlilies', 'the Tigressions', 'the Wildcats', 'the Tigertones', 'the Footnotes', 'the Nassoons']
 group_names = ['the Nassoons']
-admins = [('Yacob Yonas', 'yyonas', 'the Nassoons', True)]
+admins = [('Yacob Yonas', 'yyonas', 'the Nassoons', True),
+			('Alan Southworth', 'asouthwo', 'the Tigertones', False)]
 callbackee = [()]
 
 
