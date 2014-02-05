@@ -170,7 +170,7 @@ def group_admin(request):
 	if len(admin) is 0:
 		print admin
 		#no callbackee with this name
-		return render_to_response("admin_error.html")
+		return render_to_response("group_admin_error.html")
 	admin = admin[0]
 	if (admin.group.selections_confirmed == True):
 		return HttpResponseRedirect('/group_results')
@@ -308,7 +308,7 @@ def confirm_groups_selections(request):
 	if len(admin) is 0:
 		print admin
 		#no callbackee with this name
-		return render_to_response("admin_error.html")
+		return render_to_response("group_admin_error.html")
 	admin = admin[0]
 	if (admin.group.selections_confirmed is True):
 		##here we need to render our page that talks about
@@ -333,7 +333,7 @@ def send_callbackee_emails(request):
 	if len(admin) is 0:
 		print admin
 		#no callbackee with this name
-		return render_to_response("admin_error.html")
+		return render_to_response("group_admin_error.html")
 	admin = admin[0]
 	#zip together callbackee with every group they got called back to
 	all_callbackees = []
@@ -379,7 +379,7 @@ def site_admin(request):
 	if len(admin) is 0:
 		print admin
 		#no callbackee with this name
-		return render_to_response("admin_error.html")
+		return render_to_response("group_admin_error.html")
 	groups = Group.objects.all()
 	admin = admin[0]
 	c = {}
@@ -412,7 +412,7 @@ def view_groups_results(request):
 	admin = Admin.objects.filter(net_id=netid)
 	if len(admin) is 0:
 		#no callbackee with this name
-		return render_to_response("admin_error.html")
+		return render_to_response("group_admin_error.html")
 	admin = admin[0]
 	c = {}
 	c['admin'] = admin
