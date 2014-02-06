@@ -148,7 +148,7 @@ $('.all_submissions').on(
       		context:this,
       		type:"POST",
       		url:"/add_remove_callbacks",
-      		data:{first:first_name, last:last_name, net_id:netid, group:'the Nassoons', add:add},
+      		data:{first:first_name, last:last_name, net_id:netid, group:'{{admin.group.name}}', add:add},
       		success: function(data) {
       			if (data.error_bool == true) {
       				if (data.delete_not_found == true) {
