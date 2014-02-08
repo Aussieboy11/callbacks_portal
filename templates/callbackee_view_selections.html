@@ -2,7 +2,7 @@
 
 
 {% include "navbar.html" %}
-
+<div class='body_div'>
 {% if not decisions_made %}
 <h2 style="text-align:center">
 You haven't made your callback decisions yet, so please <a href='/make_selections'>click here</a> to make them.
@@ -11,26 +11,27 @@ You haven't made your callback decisions yet, so please <a href='/make_selection
 <h2 style="text-align:center">
 Below are the callbacks you have chosen to accept and reject.
 </h2>
-<h4 style="text-align:center">Accepted</h4>
+<h3 style="text-align:center">Accepted</h3>
 {% if accepted|length == 0 %}
-<h6 style="text-align:center"> You did not accept any callbacks.</h6>
+<h4 style="text-align:center"> You did not accept any callbacks.</h4>
 {% else %}
 <div style="text-align:center;">
-{% for callback in accepted %}<h7>{{callback.group.name}}</h7>
+{% for callback in accepted %}<h4>{{callback.group.name}}</h4>
 {% endfor %}
 </div>
 {% endif %}
-
-<h4 style="text-align:center">Rejected</h4>
+<hr/>
+<h3 style="text-align:center">Rejected</h3>
 {% if rejected|length == 0 %}
-<h6 style="text-align:center"> You did not reject any callbacks.</h6>
+<h4 style="text-align:center"> You did not reject any callbacks.</h4>
 {% else %}
 <div style="text-align:center;">
-{% for callback in accepted %}<h7>{{callback.group.name}}</h7>
+{% for callback in accepted %}<h4>{{callback.group.name}}</h4>
 {% endfor %}
 </div>
 
 {% endif %}
 
 {% endif %}
+</div>
 
