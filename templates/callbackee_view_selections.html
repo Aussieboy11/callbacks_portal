@@ -11,6 +11,7 @@ You haven't made your callback decisions yet, so please <a href='/make_selection
 <h2 style="text-align:center">
 Below are the callbacks you have chosen to accept and reject.
 </h2>
+<hr/>
 <h3 style="text-align:center">Accepted</h3>
 {% if accepted|length == 0 %}
 <h4 style="text-align:center"> You did not accept any callbacks.</h4>
@@ -20,7 +21,7 @@ Below are the callbacks you have chosen to accept and reject.
 {% endfor %}
 </div>
 {% endif %}
-<hr/>
+
 <h3 style="text-align:center">Rejected</h3>
 {% if rejected|length == 0 %}
 <h4 style="text-align:center"> You did not reject any callbacks.</h4>
