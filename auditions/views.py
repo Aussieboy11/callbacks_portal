@@ -263,7 +263,7 @@ def callbackee_save_selections(request):
 		callbackee.third_callback_conflict = False
 	callbackee.decisions_made = True
 	callbackee.save()
-	return callbackee_view_selections(request)
+	return HttpResponseRedirect('/view_selections')
 
 def callbackee_view_selections(request):
 	#should have the ability to go modify changes if the time isn't too late
@@ -319,7 +319,7 @@ def confirm_groups_selections(request):
 	group = admin.group
 	group.selections_confirmed = True
 	group.save()
-	return view_groups_results(request)
+	return HttpResponseRedirect('/group_results')
 
 def send_callbackee_emails(request):
 	try:
