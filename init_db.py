@@ -27,7 +27,7 @@ admins = [('Yacob Yonas', 'yyonas', 'the Nassoons', True),
 			('Rachel Klebanov', 'rachelhk', 'the Wildcats', False),
 			('Ryan Fauber', 'rfauber', 'the Footnotes', False),
 			('Brian Lax', 'blax', 'Roaring 20', False),
-			('Sonia Skoularikis', 'sskoular', 'the Tigressions', False),
+			('Sonia Skoularikis', 'sskoular', 'the Tigressions',False),
 			('David Li', 'heli', 'Old NasSoul', False),
 			('Elizabeth Banes', 'ebanes', 'the Tigerlilies', False),
 			('Christopher Kranenburg', 'ckranenb', 'Shere Khan', False)]
