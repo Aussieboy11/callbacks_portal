@@ -15,26 +15,7 @@
 
 		INSERT BLURB HERE
 	</p>
-<!-- <div align="center">
-	<form class="form" role="form" action='/save_selections' style="text-align:center">
 
-		<i><h5> First selection </h5></i>
-		<select class="form-control" style="width:200px;">
-			<option selected> None </option>
-			{% for callback in callbacks %}
-			<option>{{callback.group.name}}</option>
-			{% endfor %}
-		</select>
-		<i><h5> Second selection </h5></i>
-		<select class="form-control" style="width:200px;text-align:center">
-			<option selected> None </option>
-			{% for callback in callbacks %}
-			<option>{{callback.group.name}}</option>
-			{% endfor %}
-		</select>
-
-	</form>
-</div> -->
 
 <br/>
 <br/>
@@ -45,14 +26,14 @@
 
 <div align="center">
 	<form action='/save_selections'>
-		<i><h5> First selection </h5></i>
+		<i><h5> Selection </h5></i>
 		<select name='first_choice' class="form-control" style="width:500px">
 			<option selected>None</option>
 			{% for callback in callbacks %}
 			<option>{{callback.group.name}}</option>
 			{% endfor %}
 		</select>
-		<i><h5> Second selection </h5></i>
+		<i><h5> Selection </h5></i>
 		<select name='second_choice' class="form-control" style="width:500px">
 			<option selected>None</option>
 			{% for callback in callbacks %}
@@ -63,7 +44,8 @@
 
 		<div class='warning_div'></div>
 
-		<h3><strong>Do you have timing conflicts with any of the callbacks sessions? We need to know for scheduling purposes. If you have a time conflict with a session, please check the box next to that session.</strong></h3>
+		<hr/>
+		<h4><strong>Do you have timing conflicts with any of the callbacks sessions? We need to know for scheduling purposes. If you have a time conflict with a session, please check the box next to that session.</h4>
 
 		<div class="checkbox" style='width:500px;'>
 			<label>
@@ -123,7 +105,6 @@ $('.submission_button').click(function(){
 	if ($(this).siblings('select[name=first_choice]').find(":selected").text()==$(this).siblings('select[name=second_choice]').find(":selected").text()) {
 		addWarningErrorToDiv($(this).siblings('.warning_div'), 'You have chosen the same group twice. You cannot do that. Please change one of your choices to either another group or None.');
 		return false;
-
 	}
 });
 </script>
