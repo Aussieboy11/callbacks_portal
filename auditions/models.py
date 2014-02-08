@@ -6,6 +6,7 @@ from django.db import models
 class Group(models.Model):
 	name = models.CharField(max_length=40)
 	selections_confirmed = models.NullBooleanField()
+	acaprez = models.NullBooleanField()
 	def __unicode__(self):
 		return u"%s" % (self.group_name)
 

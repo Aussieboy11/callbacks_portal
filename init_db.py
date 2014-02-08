@@ -10,11 +10,27 @@ from auditions.models import *
 
 
 #group_names = ['Roaring 20', 'the Katzenjammers', 'the Tigerlilies', 'the Tigressions', 'the Wildcats', 'the Tigertones', 'the Footnotes', 'the Nassoons']
-group_names = ['the Nassoons', 'Roaring 20', 'the Tigertones', 'the Katzenjammers', 'the Wildcats']
+group_names = ['the Nassoons', 
+			'Roaring 20', 
+			'the Tigertones', 
+			'the Katzenjammers', 
+			'the Wildcats',
+			'the Footnotes',
+			'the Tigerlilies',
+			'the Tigressions',
+			'Old NasSoul',
+			'Shere Khan']
+
 admins = [('Yacob Yonas', 'yyonas', 'the Nassoons', True),
 			('Joel Simwinga', 'simwinga', 'the Tigertones', False),
 			('Abigail Kelly', 'amkelly', 'the Katzenjammers', False),
-			('Rachel Klebanov', 'rachelhk', 'the Wildcats', False)]
+			('Rachel Klebanov', 'rachelhk', 'the Wildcats', False),
+			('Ryan Fauber', 'rfauber', 'the Footnotes', False),
+			('Brian Lax', 'blax', 'Roaring 20', False),
+			('Sonia Skoularikis', 'sskoular', False),
+			('David Li', 'heli', 'Old NasSoul', False),
+			('Elizabeth Banes', 'ebanes', 'the Tigerlilies', False),
+			('Christopher Kranenburg', 'ckranenb', 'Shere Khan', False)]
 callbackee = [()]
 
 
