@@ -3,9 +3,9 @@
 {% include "navbar.html" %}
 
 <div class="body_div">
-	<h2 style="text-align:center">
+	<h3 style="text-align:center">
 		MAKE YOUR GROUP SELECTIONS HERE!
-	</h2>
+	</h3>
 
 	<p style="text-align:center">
 		Here you can submit your decisions about how many callbacks you would like to take. You have received callbacks from {{callbacks|length}} group{% if  callbacks|length != 1 %}s{% endif%}: 
@@ -43,9 +43,8 @@
 		<br/>
 
 		<div class='warning_div'></div>
-
 		<hr/>
-		<h4><strong>Do you have timing conflicts with any of the callbacks sessions? We need to know for scheduling purposes. If you have a time conflict with a session, please check the box next to that session.</h4>
+		<h4>Do you have timing conflicts with any of the callbacks sessions? We need to know for scheduling purposes. If you have a time conflict with a session, please check the box next to that session.</h4>
 
 		<div class="checkbox" style='width:500px;'>
 			<label>
@@ -97,15 +96,18 @@ function addWarningErrorToDiv(div, error) {
 $('.submission_button').click(function(){
 	if ($(this).siblings('select[name=first_choice]').find(":selected").text()=='None') {
 		var r = confirm('Are you sure that you do not want to accept any callbacks?');
-		if (r == true)
-			return true;
-		else
+		if (r == false)
 			return false;
 	}
-	if ($(this).siblings('select[name=first_choice]').find(":selected").text()==$(this).siblings('select[name=second_choice]').find(":selected").text()) {
+	if (($(this).siblings('select[name=first_choice]').find(":selected").text()==$(this).siblings('select[name=second_choice]').find(":selected").text()) && ($(this).siblings('select[name=first_choice]').find(":selected").text()!='None')) {
 		addWarningErrorToDiv($(this).siblings('.warning_div'), 'You have chosen the same group twice. You cannot do that. Please change one of your choices to either another group or None.');
 		return false;
 	}
+	var r = confirm('Are you sure that this is your final decision? Please confirm your selections because after this point, you will not be able to change them.');
+	if (r == true)
+		return true;
+	else
+		return false;
 
 });
 </script>
