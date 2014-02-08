@@ -106,6 +106,11 @@ $('.submission_button').click(function(){
 		addWarningErrorToDiv($(this).siblings('.warning_div'), 'You have chosen the same group twice. You cannot do that. Please change one of your choices to either another group or None.');
 		return false;
 	}
+	var r = confirm('Are you sure that these are the callbacks you would like to accept? Please confirm your selections because after this, you may not change your selections.');
+	if (r == true)
+		return true;
+	else
+		return false;
 });
 </script>
 
