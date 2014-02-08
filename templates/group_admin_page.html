@@ -144,6 +144,12 @@ $('.all_submissions').on(
       		add = 1;
     	if ($(this).hasClass("delete_button"))
       		add = 0;
+	    var r = confirm('Are you sure that these are all of your selections? Please confirm their names and NetIDs because after this point, you will not be able to modify your list.');
+		if (r == false)
+			return false;
+		var r = confirm('One final warning: make sure you have confirmed all submissions!');
+		if (r == false)
+			return false;
       	$.ajax({
       		context:this,
       		type:"POST",
