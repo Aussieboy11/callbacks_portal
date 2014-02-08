@@ -10,7 +10,7 @@ from auditions.models import *
 
 
 #group_names = ['Roaring 20', 'the Katzenjammers', 'the Tigerlilies', 'the Tigressions', 'the Wildcats', 'the Tigertones', 'the Footnotes', 'the Nassoons']
-group_names = ['Roaring 20', 'the Tigertones', 'the Katzenjammers', 'the Wildcats']
+group_names = ['the Nassoons', 'Roaring 20', 'the Tigertones', 'the Katzenjammers', 'the Wildcats']
 admins = [('Yacob Yonas', 'yyonas', 'the Nassoons', True),
 			('Joel Simwinga', 'simwinga', 'the Tigertones', False),
 			('Abigail Kelly', 'amkelly', 'the Katzenjammers', False),
