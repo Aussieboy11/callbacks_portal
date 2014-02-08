@@ -40,6 +40,17 @@
 			<option>{{callback.group.name}}</option>
 			{% endfor %}
 		</select>
+
+		{% if non_acaprez_callbacks|length != 0 %}
+		<i><h5> Non-Acaprez Selection </h5></i>
+		<select name='non_acaprez_choice' class="form-control" style="width:500px">
+		<option selected>None</option>
+			{% for callback in non_acaprez_callbacks %}
+			<option>{{callback.group.name}}</option>
+			{% endfor %}
+		</select>
+		{% endif %}
+
 		<br/>
 
 		<div class='warning_div'></div>

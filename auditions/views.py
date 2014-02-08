@@ -207,6 +207,10 @@ def callbackee_make_selections(request):
 		return callbackee_view_selections(request)
 	c['callbacks'] = callbacks
 	c['netid'] = netid
+	#non-acaprez callbacks
+	non_acaprez_callbacks = Callbacks.objects.filter(callbackee=callbackee, group__acaprez=False)
+	c['non_acaprez_callbacks'] = non_acaprez_callbacks
+	print(len(non_acaprez_callbacks))
 	c.update(csrf(request))
 	return render_to_response("callbackee_make_selections.html", c)
 
@@ -236,6 +240,8 @@ def callbackee_save_selections(request):
 	groups_chosen = set()
 	groups_chosen.add(datadict['first_choice'])
 	groups_chosen.add(datadict['second_choice'])
+	if (datadict['non_acaprez_choice'] != 'None'):
+		groups_chosen.add(datadict['non_acaprez_choice'])
 	callbacks = Callbacks.objects.filter(callbackee=callbackee)
 	for callback in callbacks:
 		if callback.group.name in groups_chosen:

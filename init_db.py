@@ -27,16 +27,26 @@ admins = [('Yacob Yonas', 'yyonas', 'the Nassoons', True),
 			('Rachel Klebanov', 'rachelhk', 'the Wildcats', False),
 			('Ryan Fauber', 'rfauber', 'the Footnotes', False),
 			('Brian Lax', 'blax', 'Roaring 20', False),
-			('Sonia Skoularikis', 'sskoular', False),
+			('Sonia Skoularikis', 'sskoular', 'the Tigressions', False),
 			('David Li', 'heli', 'Old NasSoul', False),
 			('Elizabeth Banes', 'ebanes', 'the Tigerlilies', False),
 			('Christopher Kranenburg', 'ckranenb', 'Shere Khan', False)]
 callbackee = [()]
 
 
-for group in group_names:
-	new_group = Group(name=group, selections_confirmed=False)
+# for group in group_names:
+# 	new_group = Group(name=group, selections_confirmed=False)
+# 	new_group.save()
+
+for num in range(8):
+	new_group = Group(name=group_names[num], selections_confirmed=False, acaprez=True)
 	new_group.save()
+
+new_group = Group(name=group_names[8], selections_confirmed=False, acaprez=False)
+new_group.save()
+
+new_group = Group(name=group_names[9], selections_confirmed=False, acaprez=False)
+new_group.save()
 
 for admin in admins:
 	new_admin = Admin(first_name=admin[0].split()[0],
