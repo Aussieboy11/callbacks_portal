@@ -7,6 +7,7 @@ from auditions import settings
 # setup_environ(settings)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "auditions.settings")
 from auditions.models import *
+from django.template import Context
 
 
 # #group_names = ['Roaring 20', 'the Katzenjammers', 'the Tigerlilies', 'the Tigressions', 'the Wildcats', 'the Tigertones', 'the Footnotes', 'the Nassoons']
