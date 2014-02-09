@@ -20,7 +20,7 @@ import os
 # send_mail('Your callback', 'Here is the message.', settings.EMAIL_HOST_USER,
 #     ['to@example.com'], fail_silently=False)
 
-MAX_NUM_CALLBACKS = 5
+MAX_NUM_CALLBACKS = 20
 DEBUG = False
 
 
