@@ -240,8 +240,11 @@ def callbackee_save_selections(request):
 	groups_chosen = set()
 	groups_chosen.add(datadict['first_choice'])
 	groups_chosen.add(datadict['second_choice'])
-	if (datadict['non_acaprez_choice'] != 'None'):
-		groups_chosen.add(datadict['non_acaprez_choice'])
+	try:
+		if (datadict['non_acaprez_choice'] != 'None'):
+			groups_chosen.add(datadict['non_acaprez_choice'])
+	except:
+		pass
 	callbacks = Callbacks.objects.filter(callbackee=callbackee)
 	for callback in callbacks:
 		if callback.group.name in groups_chosen:
