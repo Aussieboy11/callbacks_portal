@@ -22,7 +22,7 @@
 		{% endfor %}
 		{%for callback in callbacks_rejected%}
 		<tr> 
-			<td> {{callback..callbackee.first_name}} {{callback.callbackee.last_name}} </td>
+			<td> {{callback.callbackee.first_name}} {{callback.callbackee.last_name}} </td>
 			<td> <span class="glyphicon glyphicon-remove"></span> </td>
 		</tr>
 		{% endfor %}
