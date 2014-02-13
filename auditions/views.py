@@ -201,11 +201,14 @@ def callbackee_make_selections(request):
 		return render_to_response("callbackee_error.html", c)
 	##THIS ASSUMES THAT WE ALWAYS MAKE SURE THAT  A NETID
 	##CAN ONLY APPEAR ONCE
-	callbackee = callbackee[0]
+	all_callbacks = []
+	for cb in callbackee:
+		all_callbacks.extend(Callbacks.objects.filter(callbackee=cb))
+	
 	callbacks = Callbacks.objects.filter(callbackee=callbackee)
 	if callbackee.decisions_made is True:
 		return callbackee_view_selections(request)
-	c['callbacks'] = callbacks
+	c['callbacks'] = all_callbacks
 	c['netid'] = netid
 	#non-acaprez callbacks
 	non_acaprez_callbacks = Callbacks.objects.filter(callbackee=callbackee, group__acaprez=False)
