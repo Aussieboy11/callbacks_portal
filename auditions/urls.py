@@ -5,6 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
+    url(r'^', 'auditions.views.root'),
     url(r'^group_admin/?$', 'auditions.views.group_admin'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^add_remove_callbacks$', 'auditions.views.add_remove_callbackee'),

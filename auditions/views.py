@@ -66,6 +66,23 @@ def logout(request):
 
 ##FIX DUPLICATE NETID ENTRIES
 
+def root(request):
+	try:
+		if request.session['netid'] is None:
+			return check_login(request, '/')
+	
+		netid = request.session['netid']
+	except:
+		return check_login(request, '/')
+	admin = Admin.objects.filter(net_id=netid)
+	if len(admin) > 0:
+		return group_admin(request)
+	callbackee = Callbackee.filter(net_id=netid)
+	if len(callbackee) > 0:
+		return callbackee_make_selections(request)
+	return render_to_response("general_error.html")
+
+
 def add_remove_callbackee(request):
 	#first,last, net_id, add=1 for add, remove=0, group
 	data = request.POST
