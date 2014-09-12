@@ -167,7 +167,7 @@ def add_remove_callbackee(request):
 	# email.attach_alternative(html_content, "text/html")
 	# email.to = ['yyonas@princeton.edu']
 	# email.send()
-	return HttpResponse(simplejson.dumps(to_json), mimetype='application/json')
+	return HttpResponse(simplejson.dumps(to_json), content_type='application/json')
 
 def group_admin(request):
 	#things to know
