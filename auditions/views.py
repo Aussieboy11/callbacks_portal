@@ -77,7 +77,7 @@ def root(request):
 	admin = Admin.objects.filter(net_id=netid)
 	if len(admin) > 0:
 		return group_admin(request)
-	callbackee = Callbackee.filter(net_id=netid)
+	callbackee = Callbackee.objects.filter(net_id=netid)
 	if len(callbackee) > 0:
 		return callbackee_make_selections(request)
 	return render_to_response("general_error.html")
