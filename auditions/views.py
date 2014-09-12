@@ -40,9 +40,6 @@ DEBUG = True
 
 # Adapted from Luke Paulsen's code.
 def check_login(request, redirect):
-	if DEBUG == True:
-		request.session['netid'] = 'yyonas'
-		return HttpResponseRedirect(redirect)
 	cas_url = "https://fed.princeton.edu/cas/"
 	service_url = 'http://' + urllib.quote(request.META['HTTP_HOST'] + request.META['PATH_INFO'])
 	service_url = re.sub(r'ticket=[^&]*&?', '', service_url)
