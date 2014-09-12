@@ -21,8 +21,7 @@ import os
 #     ['to@example.com'], fail_silently=False)
 
 MAX_NUM_CALLBACKS = 20
-DEBUG = False
-
+DEBUG = True
 
 	# if not settings.DEBUG:
 	# 	try: # ADDED TRY HERE... ORIGINAL IN WHAT IS GOING ON... SEEMED TO FIX IT. 1 of 1           
@@ -41,6 +40,9 @@ DEBUG = False
 
 # Adapted from Luke Paulsen's code.
 def check_login(request, redirect):
+	if DEBUG == True:
+		request.session['netid'] = 'yyonas'
+		return HttpResponseRedirect(redirect)
 	cas_url = "https://fed.princeton.edu/cas/"
 	service_url = 'http://' + urllib.quote(request.META['HTTP_HOST'] + request.META['PATH_INFO'])
 	service_url = re.sub(r'ticket=[^&]*&?', '', service_url)
@@ -56,7 +58,6 @@ def check_login(request, redirect):
 	else:
 		login_url = cas_url + 'login?service=' + service_url
 		return HttpResponseRedirect(login_url)
-
 
 def logout(request):
 	request.session['netid'] = None
@@ -95,17 +96,18 @@ def add_remove_callbackee(request):
 		blah = 4
 		#look for existing?
 		try:
-			existing_callbackee = Callbackee.objects.get(net_id = datadict['net_id'])	
+			new_callbackee_entry = Callbackee(first_name=datadict['first'],
+					last_name=datadict['last'],
+					net_id = datadict['net_id'],
+					decisions_made = False,
+					email_sent = False
+					)
+			new_callbackee_entry.save()	
+			callbackee = new_callbackee_entry
 			print "in try"
 		except:
-			new_callbackee_entry = Callbackee(first_name=datadict['first'],
-								last_name=datadict['last'],
-								net_id = datadict['net_id'],
-								decisions_made = False,
-								email_sent = False
-								)
-			new_callbackee_entry.save()
-			existing_callbackee = new_callbackee_entry
+			existing_callbackee = Callbackee.objects.get(net_id = datadict['net_id'])
+			callbackee = existing_callbackee
 			print "in exception"
 		if (len(Callbacks.objects.filter(group = Group.objects.get(name=datadict['group']))) >= MAX_NUM_CALLBACKS):
 			error = True
@@ -113,12 +115,12 @@ def add_remove_callbackee(request):
 		#look for existing
 
 		#DONT ADD CALLBACK IF ONE ALREADY EXISTS
-		existing_callbacks = Callbacks.objects.filter(callbackee=existing_callbackee,
+		existing_callbacks = Callbacks.objects.filter(callbackee=callbackee,
 							group = Group.objects.get(name=datadict['group']))
 		if len(existing_callbacks) is not 0:
 			error = True
 			pass
-		new_callback_entry = Callbacks(callbackee=existing_callbackee,
+		new_callback_entry = Callbacks(callbackee=callbackee,
 										group = Group.objects.get(name=datadict['group']),
 										accepted = None)
 		new_callback_entry.save()
@@ -126,12 +128,12 @@ def add_remove_callbackee(request):
 		#remove
 		blah = 4
 		try:
-			existing_callbackee = Callbackee.objects.get(net_id = datadict['net_id'])	
+			callbackee = Callbackee.objects.get(net_id = datadict['net_id'])	
 		except:
 			error = True
 			delete_not_found = True
 		if error is False:
-			existing_callbackee.delete()
+			callbackee.delete()
 
 
 
@@ -420,7 +422,7 @@ def view_groups_results(request):
 		return check_login(request, '/site_admin')
 	admin = Admin.objects.filter(net_id=netid)
 	if len(admin) is 0:
-		#no callbackee with this name
+		#no admin with this name
 		return render_to_response("group_admin_error.html")
 	admin = admin[0]
 	c = {}
@@ -437,10 +439,39 @@ def view_groups_results(request):
 	c['callbacks_questioning'] = callbacks_questioning
 	return render_to_response('group_results.html', c)
 
-
-
-
-
-
+def add_remove_admin(request):
+	#firstname,lastname,netid, group,adminbool
+	data = request.POST
+	datadict = data.dict()
+	#acces dict with datadict['object name']
+	error = False
+	delete_not_found = False
+	try:
+		if request.session['netid'] is None:
+			return check_login(request, '/site_admin')
+		netid = request.session['netid']
+	except:
+		return check_login(request, '/site_admin')
+	current_admin = Admin.objects.filter(net_id=netid)
+	if len(admin) is 0:
+		#no admin with this name
+		return render_to_response("group_admin_error.html")
+	current_admin = current_admin[0]
+	found = False
+	if (datadict['add']=='1'):
+		#add
+		#look for existing
+		try:
+			group=Group.objects.get(name=datadict['group'])
+			new_admin = Admin(first_name=datadict['first_name'],
+				last_name=datadict['last_name'],
+				net_id=datadict['net_id'],
+				group=group,
+				)
+			new_admin.save()
+		except:
+			existing_admin = Admin.objects.get(net_id=datadict['net_id'])
+			found = True	
+			
 
 
