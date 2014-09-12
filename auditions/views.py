@@ -7,7 +7,7 @@ from django.http import QueryDict
 from django.template import Context, loader, RequestContext
 from django.core.context_processors import csrf
 from django.shortcuts import render_to_response
-from django.utils import simplejson
+import simplejson
 import urllib
 import re
 from django.conf import settings
