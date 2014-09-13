@@ -134,10 +134,11 @@ def add_remove_callbackee(request):
 		if len(existing_callbacks) is not 0:
 			error = True
 			pass
-		new_callback_entry = Callbacks(callbackee=callbackee,
-										group = Group.objects.get(name=datadict['group']),
-										accepted = None)
-		new_callback_entry.save()
+		else :
+			new_callback_entry = Callbacks(callbackee=callbackee,
+											group = Group.objects.get(name=datadict['group']),
+											accepted = None)
+			new_callback_entry.save()
 	else:
 		#remove
 		blah = 4
