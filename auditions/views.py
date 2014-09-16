@@ -148,7 +148,18 @@ def add_remove_callbackee(request):
 			error = True
 			delete_not_found = True
 		if error is False:
-			callbackee.delete()
+			try:
+				existing_callback = Callbacks.objects.get(callbackee=callbackee,
+							group = Group.objects.get(name=datadict['group']))
+			except:
+				error = True
+				delete_not_found = True
+			if error is True:
+				pass
+			existing_callback.delete()
+			other_callbacks = Callbacks.objects.filter(callbackee=callbackee)
+			if len(other_callbacks) is 0:
+				callbackee.delete()
 
 
 

@@ -12,9 +12,9 @@ class Group(models.Model):
 
 #callbackee
 class Callbackee(models.Model):
-	first_name = models.CharField(max_length = 23)
-	last_name = models.CharField(max_length = 23)
-	net_id = models.CharField(max_length = 23, unique = True)
+	first_name = models.CharField(max_length = 40)
+	last_name = models.CharField(max_length = 40)
+	net_id = models.CharField(max_length = 40, unique = True)
 	first_callback_conflict = models.NullBooleanField()
 	second_callback_conflict = models.NullBooleanField()
 	third_callback_conflict = models.NullBooleanField()
@@ -34,9 +34,9 @@ class Callbacks(models.Model):
 #admin
 #there must at all times be one site admin
 class Admin(models.Model):
-	first_name = models.CharField(max_length = 23)
-	last_name = models.CharField(max_length = 23)
-	net_id = models.CharField(max_length = 23, unique = True)
+	first_name = models.CharField(max_length = 40)
+	last_name = models.CharField(max_length = 40)
+	net_id = models.CharField(max_length = 40, unique = True)
 	group = models.ForeignKey(Group)
 	site_admin = models.NullBooleanField()
 	def __unicode__(self):

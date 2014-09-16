@@ -1,1 +1,12 @@
-s
+---------
+manage admins. 
+manage groups.
+MAKE ADMIN UNIQUE ON NETID
+MAKE CALLBACKEE UNIQUE ON NETID
+
+once I have made the db enforce that admin is unique, change db lookups to get instead of filter
+
+dropdown muenu in group admin page
+
+
+CHANGE THE CHECKBOXES TO RED AND GREEN. FOR TIMING CONFLICTS
