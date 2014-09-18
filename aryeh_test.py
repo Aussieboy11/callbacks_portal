@@ -16,6 +16,7 @@ all_callbackees = []
 their_callbacks = []
 #emails_sent
 for callbackee in Callbackee.objects.filter(net_id='aryehnc'):
+	print 'here'
 	all_callbackees.append(callbackee)
 	current_callbacks = Callbacks.objects.filter(callbackee=callbackee)
 	their_callbacks.append(current_callbacks)
